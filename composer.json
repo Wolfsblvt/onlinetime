@@ -1,0 +1,35 @@
+{
+	"name": "wolfsblvt/onlinetime",
+	"type": "phpbb-extension",
+	"description": "Keeps track of user total and average online time. Adds it to the user profile.",
+	"homepage": "http://pinkes-forum.de/dev/find.php?ext=onlinetime",
+	"version": "1.1.0",
+	"time": "2014-12-10",
+	"keywords": ["phpbb", "extension", "onlinetime"],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Clemens Husung (Wolfsblvt)",
+			"homepage": "http://www.pinkes-forum.de/",
+			"email": "wolfsblvt@gmx.de",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"require-dev": {
+		"phpbb/epv": "dev-master"
+	},
+	"extra": {
+		"display-name": "User Online Time",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
+		},
+		"version-check": {
+			"host": "pinkes-forum.de",
+			"directory": "/dev/onlinetime",
+			"filename": "version.json"
+		}
+	}
+}
