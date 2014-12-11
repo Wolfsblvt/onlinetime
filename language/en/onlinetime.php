@@ -36,7 +36,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'ONLINETIME_EXT_NAME'				=> 'User Online Time',
-	
+
 	'ONLINETIME_TOTAL'					=> 'Time spent online',
 	'ONLINETIME_AVERAGE'				=> 'Average of %s per day',
 	'ONLINETIME_CANT_SEE'				=> 'You cannot see this users online time.',

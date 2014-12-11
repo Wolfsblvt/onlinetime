@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Tests\Tests;
 
-
 use Phpbb\Epv\Files\FileInterface;
 use Phpbb\Epv\Files\Type\ServiceFileInterface;
 use Phpbb\Epv\Output\Output;
@@ -20,7 +19,6 @@ use Phpbb\Epv\Tests\Type;
 
 class epv_test_validate_service extends BaseTest
 {
-
 
 	public function __construct($debug, OutputInterface $output, $basedir, $namespace, $titania)
 	{
@@ -60,7 +58,6 @@ class epv_test_validate_service extends BaseTest
 			}
 		}
 	}
-
 
 	/**
 	 * Validate the service name to match the requirements for services.

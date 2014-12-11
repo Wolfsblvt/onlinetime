@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Output;
 
-
 use Phpbb\Epv\Files\FileInterface;
 
 class Message

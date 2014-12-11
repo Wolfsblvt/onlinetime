@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Tests;
 
-
 class Type
 {
 

@@ -14,13 +14,13 @@ class onlinetime
 {
 	/** @var \wolfsblvt\onlinetime\core\formatter */
 	protected $formatter;
-	
+
 	/** @var \Symfony\Component\DependencyInjection\ContainerInterface */
 	protected $container;
-	
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
-	
+
 	/** @var \phpbb\config\config */
 	protected $config;
 
@@ -29,10 +29,10 @@ class onlinetime
 
 	/** @var \phpbb\user */
 	protected $user;
-	
+
 	/** @var \phpbb\auth\auth */
 	protected $auth;
-	
+
 	protected $TABLE_ONLINE_TIME;
 	protected $TABLE_ONLINE_TIME_DAYS;
 
@@ -49,7 +49,7 @@ class onlinetime
 	public function __construct(\wolfsblvt\onlinetime\core\formatter $formatter, \phpbb\db\driver\driver_interface $db, \phpbb\config\config $config, \phpbb\template\template $template, \phpbb\user $user, \phpbb\auth\auth $auth)
 	{
 		global $phpbb_container;
-		
+
 		$this->container = &$phpbb_container;
 		$this->formatter = $formatter;
 		$this->db = $db;
@@ -57,15 +57,14 @@ class onlinetime
 		$this->template = $template;
 		$this->user = $user;
 		$this->auth = $auth;
-		
-		
+
 		$this->TABLE_ONLINE_TIME = $this->container->getParameter('tables.wolfsblvt.onlinetime.online_time');
 		$this->TABLE_ONLINE_TIME_DAYS = $this->container->getParameter('tables.wolfsblvt.onlinetime.online_time_days');
-		
+
 		// Add language vars
 		$this->user->add_lang_ext('wolfsblvt/onlinetime', 'onlinetime');
 	}
-	
+
 	/**
 	 * Adds the online time to user profile if it can be displayed
 	 * 
@@ -79,7 +78,7 @@ class onlinetime
 		$i_can_see = $this->auth->acl_get('u_onlinetime_view');
 		if ($is_invisible && $member_id != $this->user->data['user_id'] && !$this->auth->acl_get('u_viewonline'))
 			$i_can_see = false;
-		
+
 		if ($i_can_see)
 		{
 			// load total online time
@@ -89,7 +88,7 @@ class onlinetime
 			$result = $this->db->sql_query($sql);
 			$onlinetime_total = (int)$this->db->sql_fetchfield('user_total_time');
 			$this->db->sql_freeresult($result);
-			
+
 			// load averageonline time
 			$sql = 'SELECT AVG(day_total_time) as user_average_time
 				FROM ' . $this->TABLE_ONLINE_TIME_DAYS . "
@@ -97,8 +96,7 @@ class onlinetime
 			$result = $this->db->sql_query($sql);
 			$onlinetime_average = (int)$this->db->sql_fetchfield('user_average_time');
 			$this->db->sql_freeresult($result);
-			
-			
+
 			$this->template->assign_vars(array(
 				'ONLINETIME_CAN_SEE'			=> true,
 				'ONLINETIME_TOTAL'				=> $this->formatter->format_timespan($onlinetime_total),
@@ -106,7 +104,7 @@ class onlinetime
 			));
 		}
 	}
-	
+
 	/**
 	 * Updates the user online time
 	 * 
@@ -115,9 +113,9 @@ class onlinetime
 	public function update_user_online_time()
 	{
 		$user_id = $this->user->data['user_id'];
-		
+
 		$new_time_to_add = 0;
-		
+
 		// load lastonline time and total online time
 		$sql = 'SELECT *
 				FROM ' . $this->TABLE_ONLINE_TIME . "
@@ -126,13 +124,13 @@ class onlinetime
 		$row = $this->db->sql_fetchrow($result);
 		$user_online_data = $row;
 		$this->db->sql_freeresult($result);
-		
+
 		if (isset($user_online_data) && isset($user_online_data['user_last_action']))
 		{
 			$act_time = time();
 			$user_total_time = $user_online_data['user_total_time'];
 			$new_time_to_add = ($act_time - $user_online_data['user_last_action']);
-			
+
 			if($user_online_data['user_last_action'] > ($act_time - $this->config['load_online_time']*60))
 			{
 				$user_total_time = $user_total_time + $new_time_to_add;
@@ -142,7 +140,7 @@ class onlinetime
 				// Was not online in the last XXX minutes, so day time should not be added up
 				$new_time_to_add = 0;
 			}
-			
+
 			$sql = 'UPDATE ' . $this->TABLE_ONLINE_TIME . "
 					SET user_last_action = $act_time, user_total_time = $user_total_time
 					WHERE user_id = $user_id";
@@ -151,16 +149,16 @@ class onlinetime
 		else
 		{
 			$new_time_to_add = 0;
-			
+
 			$sql = 'INSERT INTO ' . $this->TABLE_ONLINE_TIME . ' ' . $this->db->sql_build_array('INSERT', array(
 				'user_id'			=> $user_id,
 				'user_last_action'	=> (int) time(),
 				'user_total_time'	=> 0));
 			$this->db->sql_query($sql);
 		}
-		
+
 		$day = mktime(0, 0, 0, date('m'), date('d'), date('Y')); 
-		
+
 		// add the time to the day time
 		$sql = 'INSERT INTO ' . $this->TABLE_ONLINE_TIME_DAYS . ' ' . $this->db->sql_build_array('INSERT', array(
 			'user_id'			=> $user_id,

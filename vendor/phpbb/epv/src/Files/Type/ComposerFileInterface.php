@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Files\Type;
 
-
 interface ComposerFileInterface extends JsonFileInterface
 {
 

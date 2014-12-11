@@ -16,7 +16,7 @@ class v1_1_0_data_module extends \phpbb\db\migration\migration
 	{
 		return array('\wolfsblvt\onlinetime\migrations\v1_0_0_schema');
 	}
-	
+
 	public function update_data()
 	{
 		return array(

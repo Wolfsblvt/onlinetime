@@ -25,11 +25,11 @@ class formatter
 	public function __construct(\phpbb\user $user)
 	{
 		$this->user = $user;
-		
+
 		// Add language vars
 		$this->user->add_lang_ext('wolfsblvt/onlinetime', 'formatter');
 	}
-	
+
 	/**
 	 * Formats a timespan in the users language.
 	 * 
@@ -43,11 +43,11 @@ class formatter
 		$date2 = new \DateTime("2000-1-1");
 		$date2->add(new \DateInterval("PT{$timespan}S"));
 		$diff = $date2->diff($date1);
-		
+
 		// Add week count, we want that here
 		$weeks = floor($diff->d / 7);
 		$diff->d = $diff->d % 7;
-		
+
 		$formatted = "";
 		if($diff->y > 0)
 			$formatted .= $this->user->lang((($diff->y > 1) ? 'CORE_YEARS'   : 'CORE_YEAR'),   $diff->y) . ' ';
@@ -61,7 +61,7 @@ class formatter
 			$formatted .= $this->user->lang((($diff->i > 1) ? 'CORE_MINUTES' : 'CORE_MINUTE'), $diff->i) . ' ';
 		if($diff->s > 0)
 			$formatted .= $this->user->lang((($diff->s > 1) ? 'CORE_SECONDS' : 'CORE_SECOND'), $diff->s) . ' ';
-		
+
 		return trim($formatted);
 	}
 }

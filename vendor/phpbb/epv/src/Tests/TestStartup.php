@@ -80,7 +80,6 @@ class TestStartup
 			$branch = 'master';
 		}
 
-
 		$this->output->writeln(sprintf("Checkout out %s from git from branch %s.", $git, $branch));
 		$tmpdir = sys_get_temp_dir();
 		$uniq   = $tmpdir . DIRECTORY_SEPARATOR . uniqid();

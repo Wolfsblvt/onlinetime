@@ -2222,7 +2222,7 @@ class PHPParser_Parser
     }
 
     protected function yyn278($attributes) {
-        
+
             if ($this->yyastk[$this->stackPos-(2-1)] instanceof PHPParser_Node_Expr_StaticPropertyFetch) {
                 $this->yyval = new PHPParser_Node_Expr_StaticCall($this->yyastk[$this->stackPos-(2-1)]->class, new PHPParser_Node_Expr_Variable($this->yyastk[$this->stackPos-(2-1)]->name, $attributes), $this->yyastk[$this->stackPos-(2-2)], $attributes);
             } elseif ($this->yyastk[$this->stackPos-(2-1)] instanceof PHPParser_Node_Expr_ArrayDimFetch) {
@@ -2236,7 +2236,7 @@ class PHPParser_Parser
             } else {
                 throw new Exception;
             }
-          
+
     }
 
     protected function yyn279($attributes) {

@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Tests\Tests;
 
-
 use Phpbb\Epv\Files\FileInterface;
 use Phpbb\Epv\Files\Type\RoutingFileInterface;
 use Phpbb\Epv\Output\Output;
@@ -20,7 +19,6 @@ use Phpbb\Epv\Tests\Type;
 
 class epv_test_validate_routing extends BaseTest
 {
-
 
 	public function __construct($debug, OutputInterface $output, $basedir, $namespace, $titania)
 	{

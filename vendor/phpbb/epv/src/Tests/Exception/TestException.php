@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Tests\Exception;
 
-
 class TestException extends \Exception
 {
 

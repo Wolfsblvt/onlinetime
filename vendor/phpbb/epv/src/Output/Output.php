@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Output;
 
-
 use Phpbb\Epv\Files\FileInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterInterface;
 
@@ -21,7 +20,6 @@ class Output implements \Phpbb\Epv\Output\OutputInterface
 	private $error = 0;
 	private $warning = 0;
 	private $notice = 0;
-
 
 	private $output;
 	private $debug;
@@ -185,7 +183,6 @@ class Output implements \Phpbb\Epv\Output\OutputInterface
 		}
 		$this->messages[] = new Message($type, $message, $file);
 	}
-
 
 	/**
 	 * Get all messages saved into the message queue.

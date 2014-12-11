@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Tests\Mock;
 
-
 use Phpbb\Epv\Files\FileInterface;
 use Phpbb\Epv\Output\OutputInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterInterface;

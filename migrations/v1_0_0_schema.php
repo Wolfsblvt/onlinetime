@@ -14,12 +14,12 @@ class v1_0_0_schema extends \phpbb\db\migration\migration
 {
 	private $table_online_time_name = 'online_time';
 	private $table_online_time_days_name = 'online_time_days';
-	
+
 	public function effectively_installed()
 	{
 		return $this->db_tools->sql_table_exists($this->table_prefix . $this->table_online_time_name);
 	}
-	
+
 	public function update_schema()
 	{
 		return array(

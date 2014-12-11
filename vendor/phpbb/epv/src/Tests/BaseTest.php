@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Tests;
 
-
 use Phpbb\Epv\Files\FileInterface;
 use Phpbb\Epv\Files\LineInterface;
 use Phpbb\Epv\Output\OutputInterface;

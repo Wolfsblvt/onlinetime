@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Files;
 
-
 class Line implements LineInterface
 {
 	private $file;

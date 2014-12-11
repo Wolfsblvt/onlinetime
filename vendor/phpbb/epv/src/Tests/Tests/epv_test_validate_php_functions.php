@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Tests\Tests;
 
-
 use Phpbb\Epv\Files\FileInterface;
 use Phpbb\Epv\Files\Type\LangFileInterface;
 use Phpbb\Epv\Files\Type\PHPFileInterface;
@@ -32,7 +31,6 @@ use PHPParser_Node_Stmt_Interface;
 use PHPParser_Node_Stmt_Namespace;
 use PHPParser_Node_Stmt_Use;
 use PHPParser_Parser;
-
 
 class epv_test_validate_php_functions extends BaseTest
 {
@@ -210,7 +208,6 @@ class epv_test_validate_php_functions extends BaseTest
 			$this->output->writelnIfDebug(sprintf('Did not find IN_PHPBB, but php file contains a namespace with just classes or is a test file.', $this->file->getSaveFilename()));
 		}
 	}
-
 
 	/**
 	 * Validate the structure of a php file.

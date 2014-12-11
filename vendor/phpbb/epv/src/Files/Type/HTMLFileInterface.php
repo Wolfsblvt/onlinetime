@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Files\Type;
 
-
 use Phpbb\Epv\Files\FileInterface;
 
 interface HTMLFileInterface extends FileInterface

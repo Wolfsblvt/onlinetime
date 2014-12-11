@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Files;
 
-
 use Phpbb\Epv\Files\Exception\FileException;
 
 abstract class BaseFile implements FileInterface

@@ -19,10 +19,10 @@ class listener implements EventSubscriberInterface
 {
 	/** @var \wolfsblvt\onlinetime\core\onlinetime */
 	protected $onlinetime;
-	
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
-	
+
 	/** @var \phpbb\path_helper */
 	protected $path_helper;
 
@@ -48,7 +48,7 @@ class listener implements EventSubscriberInterface
 		$this->path_helper = $path_helper;
 		$this->template = $template;
 		$this->user = $user;
-		
+
 		$this->ext_root_path = 'ext/wolfsblvt/onlinetime';
 	}
 
@@ -65,7 +65,7 @@ class listener implements EventSubscriberInterface
 			'core.permissions'					=> 'add_permissions',
 		);
 	}
-	
+
 	/**
 	 * Adds functionality to page_header
 	 *
@@ -76,11 +76,11 @@ class listener implements EventSubscriberInterface
 	{
 		// Assign template vars first
 		$this->assign_template_vars();
-		
+
 		// Updates the user online time
 		$this->onlinetime->update_user_online_time();
 	}
-	
+
 	/**
 	 * Add custom permissions language variables
 	 *
@@ -94,7 +94,7 @@ class listener implements EventSubscriberInterface
 		$permissions['u_similar_topics'] = array('lang' => 'ACL_U_SIMILARTOPICS', 'cat' => 'misc');
 		$event['permissions'] = $permissions;
 	}
-	
+
 	/**
 	 * Adds the online time to user profile if it can be displayed
 	 * 
@@ -105,7 +105,7 @@ class listener implements EventSubscriberInterface
 	{
 		$member_id = $event['member']['user_id'];
 		$is_invisible = ((isset($event['session_viewonline'])) ? $event['session_viewonline'] :	0) ? false : true;
-		
+
 		$this->onlinetime->add_onlinetime_to_memberlist_view_profile($member_id, $is_invisible);
 	}
 

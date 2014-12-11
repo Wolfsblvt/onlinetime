@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Output;
 
-
 use Phpbb\Epv\Files\FileInterface;
 
 interface OutputInterface extends \Symfony\Component\Console\Output\OutputInterface
@@ -39,7 +38,6 @@ interface OutputInterface extends \Symfony\Component\Console\Output\OutputInterf
 	 * @return
 	 */
 	public function addMessage($type, $message, FileInterface $file = null);
-
 
 	/**
 	 * Get all messages saved into the message queue.

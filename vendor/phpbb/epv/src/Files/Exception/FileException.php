@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Files\Exception;
 
-
 class FileException extends \Exception
 {
 

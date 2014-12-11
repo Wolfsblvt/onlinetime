@@ -9,7 +9,6 @@
  */
 namespace Phpbb\Epv\Files\Type;
 
-
 use Phpbb\Epv\Files\BaseFile;
 use Phpbb\Epv\Files\Exception\FileLoadException;
 use Phpbb\Epv\Output\Messages;
