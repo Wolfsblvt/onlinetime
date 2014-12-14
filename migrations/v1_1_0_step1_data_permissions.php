@@ -29,7 +29,7 @@ class v1_1_0_step1_data_permissions extends \phpbb\db\migration\migration
 	}
 
 	public function revert_data()
-	{		
+	{
 		return array(
 			array('permission.remove', array('u_onlinetime_view')),
 			array('permission.permission_unset', array('ROLE_USER_FULL', 'u_onlinetime_view')),

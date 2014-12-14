@@ -50,17 +50,29 @@ class formatter
 
 		$formatted = "";
 		if($diff->y > 0)
+		{
 			$formatted .= $this->user->lang((($diff->y > 1) ? 'CORE_YEARS'   : 'CORE_YEAR'),   $diff->y) . ' ';
+		}
 		if($diff->m > 0)
+		{
 			$formatted .= $this->user->lang((($diff->m > 1) ? 'CORE_MONTHS'  : 'CORE_MONTH'),  $diff->m) . ' ';
+		}
 		if($weeks > 0)
+		{
 			$formatted .= $this->user->lang((($weeks   > 1) ? 'CORE_WEEKS'   : 'CORE_WEEK'),   $weeks) . ' ';
+		}
 		if($diff->h > 0)
+		{
 			$formatted .= $this->user->lang((($diff->h > 1) ? 'CORE_HOURS'   : 'CORE_HOUR'),   $diff->h) . ' ';
+		}
 		if($diff->i> 0)
+		{
 			$formatted .= $this->user->lang((($diff->i > 1) ? 'CORE_MINUTES' : 'CORE_MINUTE'), $diff->i) . ' ';
+		}
 		if($diff->s > 0)
+		{
 			$formatted .= $this->user->lang((($diff->s > 1) ? 'CORE_SECONDS' : 'CORE_SECOND'), $diff->s) . ' ';
+		}
 
 		return trim($formatted);
 	}

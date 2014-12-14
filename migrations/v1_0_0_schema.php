@@ -45,7 +45,7 @@ class v1_0_0_schema extends \phpbb\db\migration\migration
 	}
 
 	public function revert_schema()
-	{		
+	{
 		return array(
 			'drop_tables'	=> array(
 				$this->table_prefix . $this->table_online_time_name,

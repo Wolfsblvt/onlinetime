@@ -10,8 +10,6 @@
 
 namespace wolfsblvt\onlinetime;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 class ext extends \phpbb\extension\base
 {
 }

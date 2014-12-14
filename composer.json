@@ -4,7 +4,7 @@
 	"description": "Keeps track of user total and average online time. Adds it to the user profile.",
 	"homepage": "http://pinkes-forum.de/dev/find.php?ext=onlinetime",
 	"version": "1.1.0",
-	"time": "2014-12-10",
+	"time": "2014-12-14",
 	"keywords": ["phpbb", "extension", "onlinetime"],
 	"license": "GPL-2.0",
 	"authors": [
@@ -17,9 +17,6 @@
 	],
 	"require": {
 		"php": ">=5.4.0"
-	},
-	"require-dev": {
-		"phpbb/epv": "dev-master"
 	},
 	"extra": {
 		"display-name": "User Online Time",

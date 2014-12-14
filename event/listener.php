@@ -33,7 +33,7 @@ class listener implements EventSubscriberInterface
 	protected $user;
 
 	/** @var \phpbb\request\request */
-   protected $request;
+	protected $request;
 
 	/**
 	 * Constructor of event listener
@@ -64,12 +64,13 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.page_header'					=> 'page_header',
-			'core.memberlist_view_profile'		=> 'add_onlinetime_to_memberlist_view_profile',
-			'core.permissions'					=> 'add_permissions',
+			'core.user_setup'						=> 'page_load',
+			'core.page_header'						=> 'assign_template_vars',
+			'core.memberlist_view_profile'			=> 'add_onlinetime_to_memberlist_view_profile',
+			'core.permissions'						=> 'add_permissions',
 
-			'core.ucp_prefs_personal_data'				=> 'ucp_prefs_get_data',
-			'core.ucp_prefs_personal_update_data'		=> 'ucp_prefs_set_data',
+			'core.ucp_prefs_personal_data'			=> 'ucp_prefs_get_data',
+			'core.ucp_prefs_personal_update_data'	=> 'ucp_prefs_set_data',
 		);
 	}
 
@@ -79,11 +80,8 @@ class listener implements EventSubscriberInterface
 	 * @param object $event The event object
 	 * @return void
 	 */
-	public function page_header($event)
+	public function page_load($event)
 	{
-		// Assign template vars first
-		$this->assign_template_vars();
-
 		// Updates the user online time
 		$this->onlinetime->update_user_online_time();
 	}
@@ -111,7 +109,7 @@ class listener implements EventSubscriberInterface
 	public function ucp_prefs_get_data($event)
 	{
 		// Request the user option vars and add them to the data array
- 		$event['data'] = array_merge($event['data'], array(
+		$event['data'] = array_merge($event['data'], array(
 			'wolfsblvt_onlinetime_hide'	=> $this->request->variable('wolfsblvt_onlinetime_hide', (int) $this->user->data['wolfsblvt_onlinetime_hide']),
 		));
 
@@ -159,7 +157,7 @@ class listener implements EventSubscriberInterface
 	 * 
 	 * @return void
 	 */
-	protected function assign_template_vars()
+	public function assign_template_vars()
 	{
 		$this->template->assign_vars(array(
 			'T_EXT_ONLINETIME_PATH'				=> $this->path_helper->get_web_root_path() . $this->ext_root_path,

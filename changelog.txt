@@ -5,6 +5,7 @@
 	• Removed adding language files twice
 	• Implemented check for permissions
 	• Fix: Adding time to the next day if close after midnight
+	• Fix: Updating online time after display
 
 
 ###########################################################################

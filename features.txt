@@ -6,8 +6,9 @@
 	• Online time not visible on invisible users profile, except you can see invisibles
 	• Permission to view online time
 	• Permission to hide online time (bound to core permission "Can hide online status")
+	• UCP option to hide online time
 	• Permission to see even hidden online times (bound to core permission "Can view hidden online users")
 
 Planned Features
 ****************
-	• UCP option to hide online time
+	• None

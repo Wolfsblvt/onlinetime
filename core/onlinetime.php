@@ -77,7 +77,9 @@ class onlinetime
 		// can you see the online time?
 		$i_can_see = $this->auth->acl_get('u_onlinetime_view');
 		if ($is_invisible && $member_id != $this->user->data['user_id'] && !$this->auth->acl_get('u_viewonline'))
+		{
 			$i_can_see = false;
+		}
 
 		if ($i_can_see)
 		{
@@ -86,7 +88,7 @@ class onlinetime
 				FROM ' . $this->TABLE_ONLINE_TIME . "
 				WHERE user_id = $member_id";
 			$result = $this->db->sql_query($sql);
-			$onlinetime_total = (int)$this->db->sql_fetchfield('user_total_time');
+			$onlinetime_total = (int) $this->db->sql_fetchfield('user_total_time');
 			$this->db->sql_freeresult($result);
 
 			// load averageonline time
@@ -94,7 +96,7 @@ class onlinetime
 				FROM ' . $this->TABLE_ONLINE_TIME_DAYS . "
 				WHERE user_id = $member_id";
 			$result = $this->db->sql_query($sql);
-			$onlinetime_average = (int)$this->db->sql_fetchfield('user_average_time');
+			$onlinetime_average = (int) $this->db->sql_fetchfield('user_average_time');
 			$this->db->sql_freeresult($result);
 
 			$this->template->assign_vars(array(
