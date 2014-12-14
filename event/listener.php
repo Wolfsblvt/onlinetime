@@ -32,6 +32,9 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \phpbb\request\request */
+   protected $request;
+
 	/**
 	 * Constructor of event listener
 	 *
@@ -41,13 +44,14 @@ class listener implements EventSubscriberInterface
 	 * @param \phpbb\template\template				$template		Template object
 	 * @param \phpbb\user							$user			User object
 	 */
-	public function __construct(\wolfsblvt\onlinetime\core\onlinetime $onlinetime, \phpbb\db\driver\driver_interface $db, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\wolfsblvt\onlinetime\core\onlinetime $onlinetime, \phpbb\db\driver\driver_interface $db, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\request\request $request)
 	{
 		$this->onlinetime = $onlinetime;
 		$this->db = $db;
 		$this->path_helper = $path_helper;
 		$this->template = $template;
 		$this->user = $user;
+		$this->request = $request;
 
 		$this->ext_root_path = 'ext/wolfsblvt/onlinetime';
 	}
@@ -63,6 +67,9 @@ class listener implements EventSubscriberInterface
 			'core.page_header'					=> 'page_header',
 			'core.memberlist_view_profile'		=> 'add_onlinetime_to_memberlist_view_profile',
 			'core.permissions'					=> 'add_permissions',
+
+			'core.ucp_prefs_personal_data'				=> 'ucp_prefs_get_data',
+			'core.ucp_prefs_personal_update_data'		=> 'ucp_prefs_set_data',
 		);
 	}
 
@@ -93,6 +100,44 @@ class listener implements EventSubscriberInterface
 		$permissions = $event['permissions'];
 		$permissions['u_similar_topics'] = array('lang' => 'ACL_U_SIMILARTOPICS', 'cat' => 'misc');
 		$event['permissions'] = $permissions;
+	}
+
+	/**
+	 * Get user's option and display it in UCP Prefs View page
+	 *
+	 * @param object $event The event object
+	 * @return void
+	 */
+	public function ucp_prefs_get_data($event)
+	{
+		// Request the user option vars and add them to the data array
+ 		$event['data'] = array_merge($event['data'], array(
+			'wolfsblvt_onlinetime_hide'	=> $this->request->variable('wolfsblvt_onlinetime_hide', (int) $this->user->data['wolfsblvt_onlinetime_hide']),
+		));
+
+		// Output the data vars to the template (except on form submit)
+		if (!$event['submit'])
+		{
+			$data = $event['data'];
+			$this->user->add_lang_ext('wolfsblvt/onlinetime', 'onlinetime');
+			$this->template->assign_vars(array(
+				'S_ONLINETIME_USER_HIDE'	=> $data['wolfsblvt_onlinetime_hide'],
+			));
+		}
+	}
+
+	/**
+	 * Add user's option state into the sql_array
+	 *
+	 * @param object $event The event object
+	 * @return void
+	 */
+	public function ucp_prefs_set_data($event)
+	{
+		$data = $event['data'];
+		$event['sql_ary'] = array_merge($event['sql_ary'], array(
+			'wolfsblvt_onlinetime_hide' => $data['wolfsblvt_onlinetime_hide'],
+		));
 	}
 
 	/**

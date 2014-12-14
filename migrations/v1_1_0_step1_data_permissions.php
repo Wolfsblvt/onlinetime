@@ -10,11 +10,11 @@
 
 namespace wolfsblvt\onlinetime\migrations;
 
-class v1_1_0_data_permissions extends \phpbb\db\migration\migration
+class v1_1_0_step1_data_permissions extends \phpbb\db\migration\migration
 {
 	public static function depends_on()
 	{
-		return array('\wolfsblvt\onlinetime\migrations\v1_1_0_data_module');
+		return array('\wolfsblvt\onlinetime\migrations\v1_1_0_schema');
 	}
 
 	public function update_data()

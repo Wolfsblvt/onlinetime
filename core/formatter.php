@@ -18,7 +18,7 @@ class formatter
 	/**
 	 * Constructor
 	 *
-	 * @param \phpbb\user $user
+	 * @param \phpbb\user					$user
 	 * @return \wolfsblvt\onlinetime\core\formatter
 	 * @access public
 	 */

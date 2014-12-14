@@ -40,4 +40,6 @@ $lang = array_merge($lang, array(
 	'ONLINETIME_TOTAL'					=> 'Online insgesamt',
 	'ONLINETIME_AVERAGE'				=> 'Durchschnittlich %s pro Tag',
 	'ONLINETIME_CANT_SEE'				=> 'Du kannst die Online-Zeit dieses Users nicht sehen.',
+
+	'ONLINETIME_USER_HIDE'				=> 'Verstecke meine Online-Zeit in meinem Profil',
 ));

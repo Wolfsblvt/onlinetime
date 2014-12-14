@@ -131,7 +131,7 @@ class onlinetime
 			$user_total_time = $user_online_data['user_total_time'];
 			$new_time_to_add = ($act_time - $user_online_data['user_last_action']);
 
-			if($user_online_data['user_last_action'] > ($act_time - $this->config['load_online_time']*60))
+			if ($user_online_data['user_last_action'] > ($act_time - $this->config['load_online_time']*60))
 			{
 				$user_total_time = $user_total_time + $new_time_to_add;
 			}
@@ -157,16 +157,40 @@ class onlinetime
 			$this->db->sql_query($sql);
 		}
 
-		$day = mktime(0, 0, 0, date('m'), date('d'), date('Y')); 
+		$today = (int) strtotime('today');
 
-		// add the time to the day time
-		$sql = 'INSERT INTO ' . $this->TABLE_ONLINE_TIME_DAYS . ' ' . $this->db->sql_build_array('INSERT', array(
-			'user_id'			=> $user_id,
-			'day'				=> (int) $day,
-			'day_total_time'	=> 0)) . "
-		ON DUPLICATE KEY
-		UPDATE
-		  day_total_time = day_total_time + $new_time_to_add ";
-		$this->db->sql_query($sql);
+		// if new time exceeds midnight, we need to split it up
+		if (($new_time_to_add > 0) && ($user_online_data['user_last_action'] < $today))
+		{
+			$time_from_yesterday = $today - $user_online_data['user_last_action'];
+
+			// add the time to the old day
+			$sql = 'UPDATE ' . $this->TABLE_ONLINE_TIME_DAYS . "
+				SET day_total_time = day_total_time + $time_from_yesterday
+				WHERE user_id = $user_id
+					AND day = " . (int) strtotime('yesterday');
+			$this->db->sql_query($sql);
+
+			$new_time_to_add -= $time_from_yesterday;
+		}
+
+		// if day exists, update, otherwise insert
+		if ($user_online_data['user_last_action'] > $today)
+		{
+			$sql = 'UPDATE ' . $this->TABLE_ONLINE_TIME_DAYS . "
+				SET day_total_time = day_total_time + $new_time_to_add
+				WHERE user_id = $user_id
+					AND day = $today";
+			$this->db->sql_query($sql);
+		}
+		else
+		{
+			$sql = 'INSERT INTO ' . $this->TABLE_ONLINE_TIME_DAYS . ' ' . $this->db->sql_build_array('INSERT', array(
+					'user_id'			=> $user_id,
+					'day'				=> (int) $today,
+					'day_total_time'	=> $new_time_to_add
+			));
+			$this->db->sql_query($sql);
+		}
 	}
 }
