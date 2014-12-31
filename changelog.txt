@@ -1,4 +1,4 @@
-﻿Actual Version
+Actual Version
 **************
 
 -- Version 1.1.0 --------------
@@ -6,7 +6,6 @@
 	• Implemented check for permissions
 	• Fix: Adding time to the next day if close after midnight
 	• Fix: Updating online time after display
-
 
 ###########################################################################
 Past Versions
