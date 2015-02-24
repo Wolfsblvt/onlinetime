@@ -115,7 +115,10 @@ class onlinetime
 	public function update_user_online_time()
 	{
 		$user_id = $this->user->data['user_id'];
-
+                if(isset($user_id)== false)
+                {
+                    return;
+                }
 		$new_time_to_add = 0;
 
 		// load lastonline time and total online time
